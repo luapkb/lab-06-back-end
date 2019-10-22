@@ -30,14 +30,14 @@ app.get('*', (request, resoponse) => {
 function searchLatToLong(lacation){
   const geoData = require('./data/jeo.jason');
   console.log(geoData);
-
-  const locationObj = {
-    search_query: location,
-    formatted_query: geoData.results[0].formatted_address,
-    latitude: geoData.results[0].location.lat,
-    longitude: geoData.results[0].location.lng,
-  }
-
+const locationObj = new Location(location,geoData);
+return locationObj;
+}
+function Location(city, geoData);{
+  this.search_query =city;
+  this.formatted_query = geoData.results[0].formatted_address;
+  this.latitude = geoData.results[0].geometry.location.lat;
+  this.longitude =  geoData.results[0].geometry.location.lng;
 }
 
 app.listen(PORT, () => console.log(`I have been heard on ${PORT}`));
